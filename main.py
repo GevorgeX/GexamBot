@@ -22,7 +22,7 @@ kb_lessons =  ReplyKeyboardMarkup(resize_keyboard=True)
 
 kb_start.add(KeyboardButton("/ԸնտրելԱռարկա")).insert(KeyboardButton("/Օգնություն"))
 kb_client.add(KeyboardButton("/Գտնել")).insert(KeyboardButton("/Ավարտ"))
-kb_lessons.add(KeyboardButton("Անգլ")).insert(KeyboardButton("Լեզու")).insert(KeyboardButton("/Պատմ"))
+kb_lessons.add(KeyboardButton("Անգլ")).insert(KeyboardButton("Լեզու")).insert(KeyboardButton("Պատմ"))
 
 inkb = InlineKeyboardMarkup(row_width=1)
 inButArr = [
