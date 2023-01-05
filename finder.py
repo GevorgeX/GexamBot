@@ -1,6 +1,11 @@
 import fitz
-from data import lessons
+import json
 
+with open('data.json') as file:
+    txt = file.read()
+    global lessons
+    lessons = json.loads(txt)
+    
 class Finder:
 
     data = None
@@ -12,16 +17,15 @@ class Finder:
     def FindPage(txt:str) -> list:
         pageNumbers = []
         for shtemNum in range(1,len(Finder.data.keys())+1):
-            pdf = fitz.open(Finder.data[shtemNum]['file'])
+            pdf = fitz.open(Finder.data[str(shtemNum)]['file'])
             for pageNum in range(len(pdf)):
                 page = pdf.load_page(pageNum)
                 if page.search_for(txt):
                     pageNumbers.append((shtemNum, pageNum+1))
         return pageNumbers
-
     @staticmethod
     def GetImageOfPage(cur_num:tuple)->str:
-        ref_of_shtem = Finder.data[cur_num[0]]['images']
+        ref_of_shtem = Finder.data[str(cur_num[0])]['images']
         if cur_num[1] >=100:
             return f'{ref_of_shtem}{ref_of_shtem[6:]}-{str(cur_num[1])}.jpg'
         elif cur_num[1] >=10:
@@ -30,14 +34,11 @@ class Finder:
             return f'{ref_of_shtem}{ref_of_shtem[6:]}-00{str(cur_num[1])}.jpg'
 
     @staticmethod
-    def GetAnswer(cur_num:list)->tuple:
-        for section in Finder.data[cur_num[0]]['sections']:
+    def GetAnswer(cur_num:tuple)->tuple:
+        for section in Finder.data[str(cur_num[0])]['sections']:
+            section = tuple(map(int  ,section.split(',')))
             if section[0] <= cur_num[1] < section[1]:
-                num = Finder.data[cur_num[0]]['sections'][section]
+                num = Finder.data[str(cur_num[0])]['sections'][f'{section[0]},{section[1]}']
                 return (cur_num[0],num)
-
-
-
-
 
 
