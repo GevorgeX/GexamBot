@@ -67,22 +67,17 @@ async def Cancel(message :types.Message , state:FSMContext):
 @dp.message_handler(state=FSMStates.selectingLesson )
 async def SetLesson(message :types.Message , state:FSMContext):
     if message.text == 'Անգլ':
+        return await bot.send_message(message.from_user.id, 'Սորի , հմի չի աշխատոիմ 😥')
         Finder.SetLesson('english')
-        await FSMStates.next()
-        await bot.send_message(message.from_user.id , 'Գրի ջիգյար ->' , reply_markup=kb_client)
     elif message.text == 'Լեզու':
         return await bot.send_message(message.from_user.id , 'Սորի , հմի չի աշխատոիմ 😥' )
         Finder.SetLesson('hayoclezu')
-        await FSMStates.next()
-        await bot.send_message(message.from_user.id , 'Գրի ջիգյար ->' , reply_markup=kb_client)
     elif message.text == 'Պատմ':
-        return await bot.send_message(message.from_user.id , 'Ես 2 օր կանեմ։' )
-        # Finder.SetLesson('hayoclezu')
-        await FSMStates.next()
-        await bot.send_message(message.from_user.id , 'Գրի ջիգյար ->' , reply_markup=kb_client)
+        Finder.SetLesson('patmutyun')
     else:
-        await bot.send_message(message.from_user.id,'Սխալ')
-
+        return await bot.send_message(message.from_user.id,'Սխալ')
+    await FSMStates.next()
+    await bot.send_message(message.from_user.id, 'Գրի ջիգյար ->', reply_markup=kb_client)
 
 @dp.message_handler(commands=['Օգնություն'] ,state=None )
 async def Help(message :types.Message):
