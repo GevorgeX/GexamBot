@@ -36,9 +36,10 @@ class Finder:
     @staticmethod
     def GetAnswer(cur_num:tuple)->tuple:
         for section in Finder.data[str(cur_num[0])]['sections']:
-            section = tuple(map(int  ,section.split(',')))
+            section = tuple(map(int,section.split(',')))
             if section[0] <= cur_num[1] < section[1]:
                 num = Finder.data[str(cur_num[0])]['sections'][f'{section[0]},{section[1]}']
                 return (cur_num[0],num)
-
-
+    @staticmethod
+    def Translate(text:str) -> str:
+        pass
