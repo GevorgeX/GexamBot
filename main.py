@@ -70,7 +70,6 @@ async def SetLesson(message :types.Message , state:FSMContext):
         return await bot.send_message(message.from_user.id, 'Սորի , հմի չի աշխատոիմ 😥')
         Finder.SetLesson('english')
     elif message.text == 'Լեզու':
-        return await bot.send_message(message.from_user.id , 'Սորի , հմի չի աշխատոիմ 😥' )
         Finder.SetLesson('hayoclezu')
     elif message.text == 'Պատմ':
         Finder.SetLesson('patmutyun')
